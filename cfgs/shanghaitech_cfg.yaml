@@ -1,0 +1,41 @@
+model_paras:
+  spatial_size: 32
+  dropout_prob: 0.1
+  img_channels: 3
+  motion_channels: 2
+  clip_hist: 4
+  clip_pred: 1
+  num_flows: 4
+
+device: cuda:0
+dataset_base_dir: ./data
+dataset_name: shanghaitech
+exp_name: shanghaitech_two-streams
+ckpt_root: ./ckpt
+log_root: ./log
+eval_root: ./eval
+
+#pretrain setting
+pretrained: False
+pretrained_model: ./ckpt/shanghaitech_two-streams/best.pth
+
+#log
+logevery: 100
+
+# training setting
+num_epochs: 40
+batchsize: 256
+lr: 0.0002
+num_workers: 4
+# lambda for frame intensity loss
+lam_frame: 1.0
+# lambda for gradient loss
+lam_grad: 1.0
+# lambda for two_streams_similar loss
+lam_similar: 1.0
+# lambda for l2正则loss
+lam_l2: 1.0
+
+# score for predict and similar的参数
+w_p: 0.6
+w_s: 0.4
